@@ -11,7 +11,7 @@ router.get('/:id',verifyToken ,userController.getUserByid);
 
 
 router.post('/',verifyToken ,userController.createUsers);
-// router.put('/:id',verifyToken ,userController.updateUser);
+router.put('/:id',verifyToken ,userController.updateUser);
 
 
 router.delete('/:id',verifyToken ,userController.deleteUserByid); 

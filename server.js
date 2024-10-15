@@ -15,16 +15,29 @@ app.use(bodyParser.json());
 
 app.use(cors());
 // Routes calling
-const userRoutes = require('./Routes/user.route');
-app.use('/api/user/', userRoutes);
+
+
+//login router
 const loginRoutes = require('./Routes/login.route');
 app.use('/api/user/', loginRoutes);
 
+
+// profile router
 const profileRoutes = require('./Routes/profile.route');
 app.use('/api/user/', profileRoutes);
 
+// users route
+const usersRoutes = require('./Routes/users.route');
+app.use('/api/users/', usersRoutes);
 
 
+
+const categoryRoutes = require('./Routes/category.route');
+app.use('/api/category', categoryRoutes);
+
+
+const subcategoryRoutes = require('./Routes/sub_category.route');
+app.use('/api/sub_category/',subcategoryRoutes);
 
 // Sync database
 sequelize.sync().then(() => {
