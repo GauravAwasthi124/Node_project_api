@@ -1,6 +1,9 @@
 const category = require('../Models/category.model');
 const { Op } = require('sequelize');
+<<<<<<< HEAD
 const sub_category = require('../Models/sub_category.model');
+=======
+>>>>>>> origin/main
 
 exports.CreateCategory = async (req, res) => {
     try {
@@ -51,7 +54,10 @@ exports.getAllCategory= async (req, res) => {
 exports.getCategorybyid = async (req, res) => {
     try {
         const id = req.params.id
+<<<<<<< HEAD
         console.log(id);
+=======
+>>>>>>> origin/main
         const userdata = await category.findByPk(id);
         if (!userdata) {
             res.status(404).json({ message: 'User Not Found' });
@@ -66,8 +72,11 @@ exports.getCategorybyid = async (req, res) => {
 exports.deleteCategorybyid = async (req, res) => {
     try {
         const deleteId = req.params.id;
+<<<<<<< HEAD
         console.log(deleteId);
         await sub_category.destroy({ where: { category_id: deleteId } });
+=======
+>>>>>>> origin/main
         const deleteUser = await category.destroy({ where: { id: deleteId } });
         if (!deleteId) {
             res.status(404).json({ message: 'User Not Found' });

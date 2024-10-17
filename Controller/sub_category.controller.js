@@ -1,6 +1,9 @@
 const sub_category = require('../Models/sub_category.model');
 const { Op } = require('sequelize');
+<<<<<<< HEAD
 const category = require('../Models/category.model');
+=======
+>>>>>>> origin/main
 
 exports.createSubCategory = async (req, res) => {
     try {
@@ -37,6 +40,7 @@ exports.updateSubCategory = async (req, res) => {
 
 exports.getAllSubCategory = async (req, res) => {
     try {
+<<<<<<< HEAD
         const data = await sub_category.findAll(
             {
                 include: [
@@ -48,6 +52,9 @@ exports.getAllSubCategory = async (req, res) => {
                 attributes: ['id', 'sub_category_name', 'added_by', 'status'],
             }
         );
+=======
+        const data = await sub_category.findAll();
+>>>>>>> origin/main
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -58,6 +65,7 @@ exports.getAllSubCategory = async (req, res) => {
 exports.getSubCategorybyid = async (req, res) => {
     try {
         const id = req.params.id
+<<<<<<< HEAD
         const userdata = await sub_category.findByPk(id, {
             include: [
                 {
@@ -67,6 +75,9 @@ exports.getSubCategorybyid = async (req, res) => {
             ],
             attributes: ['id', 'sub_category_name', 'added_by', 'status'],
         });
+=======
+        const userdata = await sub_category.findByPk(id);
+>>>>>>> origin/main
         if (!userdata) {
             res.status(404).json({ message: 'User Not Found' });
         }

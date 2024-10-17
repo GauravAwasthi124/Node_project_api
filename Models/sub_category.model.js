@@ -1,17 +1,23 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require('../Connection/connection');
+<<<<<<< HEAD
 const category = require('../Models/category.model');
 
 
+=======
+>>>>>>> origin/main
 
 const sub_category = sequelize.define('sub_category', {
     category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+<<<<<<< HEAD
         references: {
             model: category,
             key: 'id',
         }
+=======
+>>>>>>> origin/main
     },
     sub_category_name: {
         type: DataTypes.STRING,
@@ -30,6 +36,7 @@ const sub_category = sequelize.define('sub_category', {
     timestamps: true
 });
 
+<<<<<<< HEAD
 
 category.hasMany(sub_category,
     {
@@ -44,4 +51,6 @@ sub_category.belongsTo(category,
     }
 );
 
+=======
+>>>>>>> origin/main
 module.exports = sub_category;
