@@ -19,12 +19,13 @@ app.use(cors());
 
 //login router
 const loginRoutes = require('./Routes/login.route');
-app.use('/api/user/', loginRoutes);
+app.use('/api/', loginRoutes);
 
 
 // profile router
 const profileRoutes = require('./Routes/profile.route');
-app.use('/api/user/', profileRoutes);
+app.use('/api/', profileRoutes);
+
 
 // users route
 const usersRoutes = require('./Routes/users.route');

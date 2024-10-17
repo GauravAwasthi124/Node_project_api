@@ -1,9 +1,10 @@
 const users = require('../Models/users.model');
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 
 exports.createUsers = async (req, res) => {
     try {
-        const {name, email,password, userrole, status} = req.body;
+        const { name, email, password, userrole, status } = req.body;
 
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds)
@@ -17,12 +18,39 @@ exports.createUsers = async (req, res) => {
         res.status(201).json(newUser);
     } catch (error) {
         res.status(400).json({ error: error.message });
-    }  
+    }
 };
+
+exports.updateUser = async (req, res) => {
+    try {
+        const updateid = req.params.id;
+        const { name, email, password, userrole, status } = req.body;
+        const saltRounds_two = 10;
+        const hashedPassword_two = await bcrypt.hash(password, saltRounds_two);
+        const updateuser = await users.update(
+            {
+                name: name,
+                email: email,
+                password: hashedPassword_two,
+                userrole: userrole,
+                status: status
+            },
+            {
+                where: { id: updateid }
+            }
+        );
+        res.status(200).json({ message: "Data Updated successfully" })
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+
+    }
+}
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const data = await users.findAll();
+        const data = await users.findAll({
+            where: {status:1}
+        });
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -70,13 +98,14 @@ exports.deleteAllUser = async (req, res) => {
 
 
 exports.searchUsers = async (req, res) => {
-    const {name, email } = req.query;
+    const { name, email ,userrole } = req.query;
     try {
         const searchusers = await users.findAll({
             where: {
                 [Op.or]: [
-                    { name: { [Op.like]: `%${name}%` } }, 
-                    {email: { [Op.like]: `%${email}%`}}
+                    { name: { [Op.like]: `%${name}%` } },
+                    { email: { [Op.like]: `%${email}%` } },
+                    {userrole: {[Op.like]: `%${userrole}`}}
                 ]
             }
         });
